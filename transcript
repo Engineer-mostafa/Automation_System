@@ -1,0 +1,131 @@
+# Compile of automation_sys.vhd was successful.
+vsim -gui work.automation_sys
+# vsim -gui work.automation_sys 
+# Start time: 23:18:46 on Dec 17,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.automation_sys(arch_automation_sys)
+add wave -position insertpoint sim:/automation_sys/*
+force -freeze sim:/automation_sys/clk 1 0, 0 {50 ps} -r 100
+noforce sim:/automation_sys/fdoor
+noforce sim:/automation_sys/rdoor
+noforce sim:/automation_sys/winbuzz
+noforce sim:/automation_sys/alarambuzz
+noforce sim:/automation_sys/heater
+noforce sim:/automation_sys/cooler
+force -freeze sim:/automation_sys/SFD 1 0
+force -freeze sim:/automation_sys/SRD 1 0
+force -freeze sim:/automation_sys/SW 1 0
+force -freeze sim:/automation_sys/SFA 1 0
+force -freeze sim:/automation_sys/ST 11 0
+run
+run
+run
+force -freeze sim:/automation_sys/SFD 0 0
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 23:20:21 on Dec 17,2021, Elapsed time: 0:01:35
+# Errors: 0, Warnings: 5
+vsim -gui work.automation_sys
+# vsim -gui work.automation_sys 
+# Start time: 23:24:23 on Dec 17,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.automation_sys(arch_automation_sys)
+quit -sim
+# End time: 23:24:31 on Dec 17,2021, Elapsed time: 0:00:08
+# Errors: 0, Warnings: 1
+# Compile of automation_sys.vhd was successful.
+vsim -gui work.automation_sys
+# vsim -gui work.automation_sys 
+# Start time: 23:24:41 on Dec 17,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.automation_sys(arch_automation_sys)
+add wave -position insertpoint sim:/automation_sys/*
+force -freeze sim:/automation_sys/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/automation_sys/SFD 0 0
+force -freeze sim:/automation_sys/SRD 0 0
+force -freeze sim:/automation_sys/SW 0 0
+force -freeze sim:/automation_sys/SFA 0 0
+force -freeze sim:/automation_sys/ST 0 0
+# Value length (1) does not equal array index length (2).
+# ** UI-Msg: (vsim-4011) Invalid force value: 0 0.
+# 
+force -freeze sim:/automation_sys/ST 00 0
+force -freeze sim:/automation_sys/rst 1 0
+run
+run
+force -freeze sim:/automation_sys/rst 0 0
+run
+run
+force -freeze sim:/automation_sys/SFD 1 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/automation_sys/SFD 0 0
+force -freeze sim:/automation_sys/SRD 1 0
+run
+run
+run
+run
+quit -sim
+# End time: 23:27:28 on Dec 17,2021, Elapsed time: 0:02:47
+# Errors: 0, Warnings: 2
+# Compile of automation_sys.vhd was successful.
+vsim -gui work.automation_sys
+# vsim -gui work.automation_sys 
+# Start time: 23:30:32 on Dec 17,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.automation_sys(arch_automation_sys)
+add wave -position insertpoint sim:/automation_sys/*
+force -freeze sim:/automation_sys/rst 1 0
+force -freeze sim:/automation_sys/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/automation_sys/SFD 1 0
+force -freeze sim:/automation_sys/SRD 0 0
+force -freeze sim:/automation_sys/SW 0 0
+force -freeze sim:/automation_sys/SFA 0 0
+force -freeze sim:/automation_sys/ST 00 0
+run
+run
+force -freeze sim:/automation_sys/SRD 1 0
+run
+run
+force -freeze sim:/automation_sys/rst 0 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 23:32:09 on Dec 17,2021, Elapsed time: 0:01:37
+# Errors: 0, Warnings: 2

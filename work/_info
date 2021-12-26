@@ -1,0 +1,97 @@
+m255
+K4
+z2
+!s11e MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dD:/Mostafa/CMP3/CA/RISK-Processor
+Eautomation_sys
+Z0 w1639775524
+Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 35
+Z4 dD:/Mostafa/CMP3/VLSI/project
+Z5 8D:/Mostafa/CMP3/VLSI/project/vlsi.vhd
+Z6 FD:/Mostafa/CMP3/VLSI/project/vlsi.vhd
+l0
+L7 1
+V8YaAJ5?hS>nZQ_C=;C[[H2
+!s100 ;EWCUoSN6gY8ZLUEB>:TD0
+Z7 OV;C;2020.1;71
+32
+Z8 !s110 1639775527
+!i10b 1
+Z9 !s108 1639775527.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Mostafa/CMP3/VLSI/project/vlsi.vhd|
+!s107 D:/Mostafa/CMP3/VLSI/project/vlsi.vhd|
+!i113 1
+Z11 o-work work -2002 -explicit
+Z12 tExplicit 1 CvgOpt 0
+Aarch_automation_sys
+R1
+R2
+R3
+DEx4 work 14 automation_sys 0 22 8YaAJ5?hS>nZQ_C=;C[[H2
+!i122 35
+l27
+Z13 L20 160
+V[Jo=oDGi<2le>aT8aPE193
+!s100 _ffL5YN5o<[>mmAdb5BQR0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+Z14 !s107 D:/Mostafa/CMP3/VLSI/project/vlsi.vhd|
+!i113 1
+R11
+R12
+Eautomation_system
+Z15 w1639775397
+R1
+R2
+R3
+!i122 34
+R4
+Z16 8D:/Mostafa/CMP3/VLSI/project/integraed.vhd
+Z17 FD:/Mostafa/CMP3/VLSI/project/integraed.vhd
+l0
+L7 1
+VZl4P<51T4YRWOTHL9z]M63
+!s100 zF49TTV]Ybi4hSj7diWLQ0
+R7
+32
+Z18 !s110 1639775460
+!i10b 1
+Z19 !s108 1639775460.000000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Mostafa/CMP3/VLSI/project/integraed.vhd|
+Z21 !s107 D:/Mostafa/CMP3/VLSI/project/integraed.vhd|
+!i113 1
+R11
+R12
+Aarch_automation_system
+R1
+R2
+R3
+DEx4 work 17 automation_system 0 22 Zl4P<51T4YRWOTHL9z]M63
+!i122 34
+l27
+R13
+VzG[>Z0eEYNQ1YTeEBh6gf3
+!s100 G]z?Ec<XHHR0[PEdHJHB30
+R7
+32
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R11
+R12
