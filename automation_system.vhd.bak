@@ -22,8 +22,7 @@ Architecture arch_automation_sys of automation_sys is
 	type system_states is ( start, front , rear , fire , window, heater_state, cooler_state);
 		
 	-- state signal decleration
-	signal my_curr_state , next_state : system_states;
-	signal fs_door : std_logic;
+	signal my_curr_state: system_states;
 	begin
 
 
@@ -41,13 +40,11 @@ Architecture arch_automation_sys of automation_sys is
 							alarambuzz	<= '0';
 							heater		<= '0';
 							cooler		<= '0';
-						else					-- update current state
-							
-							case (my_curr_state) is 
+						else
+						case (my_curr_state) is 
 							-- we return here after reach cooler so we should handle this case return after cooler or after rst
-							
 							when start =>
-								cooler <= '0';
+								
 								if  SFD = '1' then 			  
 									my_curr_state   <= front;
 									fdoor 		<= '1';
@@ -72,7 +69,7 @@ Architecture arch_automation_sys of automation_sys is
 						--------------------------------------------------------
 							when front =>			  		-- propagate to the next stage
 								fdoor <= '0';
-								if SRD = '1' then
+								IF SRD = '1' then
 									my_curr_state   <= rear;
 									rdoor		<= '1';
 								ELSIF SW = '1' then
@@ -87,7 +84,10 @@ Architecture arch_automation_sys of automation_sys is
 								ELSIF ST = "11" then
 									my_curr_state   <= cooler_state;
 									cooler		<= '1';
-								else 
+								ELSIF SFD = '1' then 			 
+									my_curr_state   <= front;
+									fdoor <= '1';
+								else
 									my_curr_state   <= start;
 								end if;
 						--------------------------------------------------------
@@ -106,13 +106,18 @@ Architecture arch_automation_sys of automation_sys is
 								ELSIF ST = "11" then
 									my_curr_state   <= cooler_state;
 									cooler		<= '1';
-								else 
+								elsif  SFD = '1' then 			  
+									my_curr_state   <= front;
+									fdoor 		<= '1';
+								elsif  SRD = '1' then 
+									my_curr_state   <= rear;
+									rdoor <= '1';
+								else
 									my_curr_state   <= start;
 								end if;
 										
 						--------------------------------------------------------
 							when window => 			  		-- propagate to the next stage
-					
 								winbuzz <= '0';
 								if SFA = '1' then
 									my_curr_state   <= fire;
@@ -123,7 +128,16 @@ Architecture arch_automation_sys of automation_sys is
 								ELSIF ST = "11" then
 									my_curr_state   <= cooler_state;
 									cooler		<= '1';
-								else 
+								ELSIF  SFD = '1' then 			  
+									my_curr_state   <= front;
+									fdoor 		<= '1';
+								ELSIF SRD = '1' then
+									my_curr_state   <= rear;
+									rdoor		<= '1';
+								ELSIF SW = '1' then 
+									my_curr_state   <= window;
+									winbuzz <= '1';
+								else
 									my_curr_state   <= start;
 								end if;
 						--------------------------------------------------------
@@ -136,18 +150,44 @@ Architecture arch_automation_sys of automation_sys is
 								ELSIF ST = "11" then
 									my_curr_state   <= cooler_state;
 									cooler		<= '1';
-								else 
+								ELSIF  SFD = '1' then 			  
+									my_curr_state   <= front;
+									fdoor 		<= '1';
+								ELSIF SRD = '1' then
+									my_curr_state   <= rear;
+									rdoor		<= '1';
+								ELSIF SW = '1' then
+									my_curr_state   <= window;
+									winbuzz		<= '1';
+								ELSIF SFA = '1' then
+									my_curr_state   <= fire;
+									alarambuzz <= '1';
+								else
 									my_curr_state   <= start;
 								end if;	
 						--------------------------------------------------------
 							when heater_state => 			  	-- propagate to the next stage
-								my_curr_state   <= cooler_state;
+								
 								heater <= '0';
-								if  ST = "11" then 		  
+								if  ST = "11" then 
+									my_curr_state   <= cooler_state;		  
 									cooler <= '1';
-								else 
-									cooler <= '0';
-								else 
+								ELSIF  SFD = '1' then 			  
+									my_curr_state   <= front;
+									fdoor 		<= '1';
+								ELSIF SRD = '1' then
+									my_curr_state   <= rear;
+									rdoor		<= '1';
+								ELSIF SW = '1' then
+									my_curr_state   <= window;
+									winbuzz		<= '1';
+								ELSIF SFA = '1' then
+									my_curr_state   <= fire;
+									alarambuzz <= '1';
+								ELSIF ST = "01" then
+									my_curr_state   <= heater_state;
+									heater <= '1';
+								else
 									my_curr_state   <= start;
 								end if;
 						--------------------------------------------------------
@@ -171,7 +211,7 @@ Architecture arch_automation_sys of automation_sys is
 								ELSIF ST = "11" then
 									my_curr_state   <= cooler_state;
 									cooler		<= '1';
-								else 
+								else
 									my_curr_state   <= start;
 								end if;	
 
@@ -180,17 +220,8 @@ Architecture arch_automation_sys of automation_sys is
 						END IF;
 					END IF;
 				
-				END PROCESS; 
-	
---------------------------------------------------------------------------------------------------------------
- 
-	
-						
-				
+				END PROCESS; 	
 	
 
---------------------------------------------------------------------------------------------------------------
-
-	
 
 end arch_automation_sys;
