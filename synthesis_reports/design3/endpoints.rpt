@@ -1,0 +1,30 @@
+Report End Points: 
+-----+-------+------+-------+------+-----+-----+------+----------------------+----------------------
+     |Group  |Launch|Capture|Shift |Delay|Depth|Slack |Begin Point           |End Point             
+-----+-------+------+-------+------+-----+-----+------+----------------------+----------------------
+1    |default|sysclk|sysclk |1500.0|315.7|    7|1022.5|my_curr_state_reg[0]/Q|heater_reg/D          
+2    |default|sysclk|sysclk |1500.0|283.3|    7|1058.3|my_curr_state_reg[0]/Q|my_curr_state_reg[2]/D
+3    |default|sysclk|sysclk |1500.0|243.4|    7|1093.4|my_curr_state_reg[0]/Q|cooler_reg/D          
+-----+-------+------+-------+------+-----+-----+------+----------------------+----------------------
+Report End Points: 
+-----+-----+--------------+-------+------+-----+-----+-----+-----------+----------------------
+     |Group|Launch        |Capture|Shift |Delay|Depth|Slack|Begin Point|End Point             
+-----+-----+--------------+-------+------+-----+-----+-----+-----------+----------------------
+1    |I2R  |rtDefaultClock|sysclk |1500.0|332.6|    5|428.8|SW         |heater_reg/D          
+2    |I2R  |rtDefaultClock|sysclk |1500.0|300.2|    5|464.6|SW         |my_curr_state_reg[2]/D
+3    |I2R  |rtDefaultClock|sysclk |1500.0|260.3|    5|499.7|SW         |cooler_reg/D          
+-----+-----+--------------+-------+------+-----+-----+-----+-----------+----------------------
+Report End Points: 
+-----+-----+------+-------+-----+-----+-----+-----+-----------+---------
+     |Group|Launch|Capture|Shift|Delay|Depth|Slack|Begin Point|End Point
+-----+-----+------+-------+-----+-----+-----+-----+-----------+---------
+1    |I2O  |      |       |     |     |     |     |           |         
+-----+-----+------+-------+-----+-----+-----+-----+-----------+---------
+Report End Points: 
+-----+-----+------+-------+-----+-----+-----+-----+-------------+---------
+     |Group|Launch|Capture|Shift|Delay|Depth|Slack|Begin Point  |End Point
+-----+-----+------+-------+-----+-----+-----+-----+-------------+---------
+1    |R2O  |sysclk|vsysclk|500.0|  0.4|    0| 48.2|fdoor_reg/Q  |fdoor    
+2    |R2O  |sysclk|vsysclk|500.0|  0.4|    0| 48.2|rdoor_reg/Q  |rdoor    
+3    |R2O  |sysclk|vsysclk|500.0|  0.4|    0| 48.2|winbuzz_reg/Q|winbuzz  
+-----+-----+------+-------+-----+-----+-----+-----+-------------+---------
