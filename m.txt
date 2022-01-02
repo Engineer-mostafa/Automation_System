@@ -1,0 +1,5 @@
+lab5(starter kit):
+https://drive.google.com/file/d/14DnQpRxdOmS-RV8woDICXiAiVai8qrdS/view?usp=sharing
+
+fp_utillization = 50 in (automation_sys & design3)
+fp_utillization = 40 in (design2)

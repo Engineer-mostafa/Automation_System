@@ -1,0 +1,131 @@
+#----------------------------------------------------------------------
+# Floorplan tcl script file
+# Created by Nitro-SoC version 1.68700.2.290
+# Mon Jan  3 01:10:49 2022
+# User: vlsi
+# Host: localhost.localdomain
+#----------------------------------------------------------------------
+
+# Switch to angstroms
+set orig_dist_unit [config_units -units angstrom -value_type distance]
+
+
+#----------------------------------------------------------------------
+# Auxiliary procs
+#----------------------------------------------------------------------
+proc place_cell { xorigin yorigin placed orient name } {
+  set_property -name xorigin -value $xorigin [get_cells $name]
+  set_property -name yorigin -value $yorigin [get_cells $name]
+  set_property -name orientation -value $orient [get_cells $name]
+  set_property -name placed -value $placed [get_cells $name]
+}
+
+proc create_and_set_via { lib_via net x_center y_center shape } {
+    set via_name [create_via -type pre_route -lib_via $lib_via -net $net -x_center $x_center -y_center $y_center]
+    set_property -objects $via_name -name shape -value $shape
+}
+
+#----------------------------------------------------------------------
+# Partition 'design2'
+#----------------------------------------------------------------------
+
+#----------------------------------------------------------------------
+# bbox section
+#----------------------------------------------------------------------
+create_chip -core_site FreePDK45_38x28_10R_NP_162NW_34O -xl_area 0 -yb_area 0 -xr_area 140600 -yt_area 154000 -orient north -double_backed -xl_margin 20000 -yb_margin 20000 -force
+set core_points { 0 0 0 154000 140600 154000 140600 0 }
+set_core_area -points $core_points
+
+#----------------------------------------------------------------------
+# rows section
+#----------------------------------------------------------------------
+remove_objects -objects [get_objects -type row -of_objects [get_objects -type partition design2] ]
+create_rows -partition design2 -core_site FreePDK45_38x28_10R_NP_162NW_34O -orient flip_south -rectangle [list 20000 118000 118800 132000]
+create_rows -partition design2 -core_site FreePDK45_38x28_10R_NP_162NW_34O -orient north -rectangle [list 20000 104000 118800 118000]
+create_rows -partition design2 -core_site FreePDK45_38x28_10R_NP_162NW_34O -orient flip_south -rectangle [list 20000 90000 118800 104000]
+create_rows -partition design2 -core_site FreePDK45_38x28_10R_NP_162NW_34O -orient north -rectangle [list 20000 76000 118800 90000]
+create_rows -partition design2 -core_site FreePDK45_38x28_10R_NP_162NW_34O -orient flip_south -rectangle [list 20000 62000 118800 76000]
+create_rows -partition design2 -core_site FreePDK45_38x28_10R_NP_162NW_34O -orient north -rectangle [list 20000 48000 118800 62000]
+create_rows -partition design2 -core_site FreePDK45_38x28_10R_NP_162NW_34O -orient flip_south -rectangle [list 20000 34000 118800 48000]
+create_rows -partition design2 -core_site FreePDK45_38x28_10R_NP_162NW_34O -orient north -rectangle [list 20000 20000 118800 34000]
+
+
+#----------------------------------------------------------------------
+# tracks section
+#----------------------------------------------------------------------
+remove_objects -objects [get_objects -type track -of_objects [get_objects -type partition design2]]
+create_tracks -partition design2 -layer metal1 -start 1100 -step 1400 -count 110
+create_tracks -partition design2 -layer metal2 -start 50 -step 1900 -count 74
+create_tracks -partition design2 -layer metal3 -start 1100 -step 1400 -count 110
+create_tracks -partition design2 -layer metal4 -start 1350 -step 2800 -count 50
+create_tracks -partition design2 -layer metal5 -start 1100 -step 2800 -count 55
+create_tracks -partition design2 -layer metal6 -start 1350 -step 2800 -count 50
+create_tracks -partition design2 -layer metal7 -start 4700 -step 8000 -count 19
+create_tracks -partition design2 -layer metal8 -start 4950 -step 8000 -count 17
+create_tracks -partition design2 -layer metal9 -start 4700 -step 16000 -count 10
+create_tracks -partition design2 -layer metal10 -start 4950 -step 16000 -count 9
+
+#----------------------------------------------------------------------
+# pins section
+#----------------------------------------------------------------------
+remove_objects -objects [get_objects -type phy_rect -of_objects [get_ports -of_objects [get_objects -type partition design2]]]
+create_port_rectangle -port [get_ports alarambuzz -of_objects [get_objects -type partition design2]] -xl 117450 -yb 153300 -xr 118150 -yt 154000 -layer metal2
+create_port_rectangle -port [get_ports cooler -of_objects [get_objects -type partition design2]] -xl 139900 -yb 27650 -xr 140600 -yt 28350 -layer metal3
+create_port_rectangle -port [get_ports fdoor -of_objects [get_objects -type partition design2]] -xl 139900 -yb 110250 -xr 140600 -yt 110950 -layer metal3
+create_port_rectangle -port [get_ports heater -of_objects [get_objects -type partition design2]] -xl 139900 -yb 82250 -xr 140600 -yt 82950 -layer metal3
+create_port_rectangle -port [get_ports rdoor -of_objects [get_objects -type partition design2]] -xl 50950 -yb 153300 -xr 51650 -yt 154000 -layer metal2
+create_port_rectangle -port [get_ports winbuzz -of_objects [get_objects -type partition design2]] -xl 83250 -yb 153300 -xr 83950 -yt 154000 -layer metal2
+create_port_rectangle -port [get_ports SFA -of_objects [get_objects -type partition design2]] -xl 83250 -yb 0 -xr 83950 -yt 700 -layer metal2
+create_port_rectangle -port [get_ports SFD -of_objects [get_objects -type partition design2]] -xl 0 -yb 41650 -xr 700 -yt 42350 -layer metal3
+create_port_rectangle -port [get_ports SRD -of_objects [get_objects -type partition design2]] -xl 85150 -yb 0 -xr 85850 -yt 700 -layer metal2
+create_port_rectangle -port [get_ports ST[1] -of_objects [get_objects -type partition design2]] -xl 81350 -yb 0 -xr 82050 -yt 700 -layer metal2
+create_port_rectangle -port [get_ports ST[0] -of_objects [get_objects -type partition design2]] -xl 79450 -yb 0 -xr 80150 -yt 700 -layer metal2
+create_port_rectangle -port [get_ports SW -of_objects [get_objects -type partition design2]] -xl 0 -yb 69650 -xr 700 -yt 70350 -layer metal3
+create_port_rectangle -port [get_ports clk -of_objects [get_objects -type partition design2]] -xl 139900 -yb 26250 -xr 140600 -yt 26950 -layer metal3
+create_port_rectangle -port [get_ports rst -of_objects [get_objects -type partition design2]] -xl 139900 -yb 54250 -xr 140600 -yt 54950 -layer metal3
+
+#----------------------------------------------------------------------
+# preroutes section
+#----------------------------------------------------------------------
+remove_objects -objects [get_wires -filter is_pre_route -of_objects [get_nets -of_objects [get_objects -type partition design2]]]
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 1400 -yb_rect 1400 -xr_rect 139200 -yt_rect 5400 -orientation horizontal -shape ring
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 1400 -yb_rect 1400 -xr_rect 5400 -yt_rect 152600 -orientation vertical -shape ring
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 1400 -yb_rect 148600 -xr_rect 139200 -yt_rect 152600 -orientation horizontal -shape ring
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 135200 -yb_rect 1400 -xr_rect 139200 -yt_rect 152600 -orientation vertical -shape ring
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 15400 -yb_rect 1400 -xr_rect 19400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 23400 -yb_rect 1400 -xr_rect 27400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 31400 -yb_rect 1400 -xr_rect 35400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 39400 -yb_rect 1400 -xr_rect 43400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 47400 -yb_rect 1400 -xr_rect 51400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 55400 -yb_rect 1400 -xr_rect 59400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 63400 -yb_rect 1400 -xr_rect 67400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 71400 -yb_rect 1400 -xr_rect 75400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 79400 -yb_rect 1400 -xr_rect 83400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 87400 -yb_rect 1400 -xr_rect 91400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 95400 -yb_rect 1400 -xr_rect 99400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 103400 -yb_rect 1400 -xr_rect 107400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 111400 -yb_rect 1400 -xr_rect 115400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VDD] -layer metal8 -xl_rect 119400 -yb_rect 1400 -xr_rect 123400 -yt_rect 152600 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 9400 -xr_rect 131200 -yt_rect 13400 -orientation horizontal -shape ring
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 9400 -xr_rect 13400 -yt_rect 144600 -orientation vertical -shape ring
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 140600 -xr_rect 131200 -yt_rect 144600 -orientation horizontal -shape ring
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 127200 -yb_rect 9400 -xr_rect 131200 -yt_rect 144600 -orientation vertical -shape ring
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 15400 -xr_rect 13400 -yt_rect 19400 -orientation vertical -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 23400 -xr_rect 131200 -yt_rect 27400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 31400 -xr_rect 131200 -yt_rect 35400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 39400 -xr_rect 131200 -yt_rect 43400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 47400 -xr_rect 131200 -yt_rect 51400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 55400 -xr_rect 131200 -yt_rect 59400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 63400 -xr_rect 131200 -yt_rect 67400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 71400 -xr_rect 131200 -yt_rect 75400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 79400 -xr_rect 131200 -yt_rect 83400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 87400 -xr_rect 131200 -yt_rect 91400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 95400 -xr_rect 131200 -yt_rect 99400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 103400 -xr_rect 131200 -yt_rect 107400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 111400 -xr_rect 131200 -yt_rect 115400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 119400 -xr_rect 131200 -yt_rect 123400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 9400 -yb_rect 127400 -xr_rect 131200 -yt_rect 131400 -orientation horizontal -shape stripe
+create_wire -type pre_route -net [get_nets -of_objects [get_objects -type partition design2] VSS] -layer metal7 -xl_rect 127200 -yb_rect 15400 -xr_rect 131200 -yt_rect 19400 -orientation vertical -shape stripe
+
+# Switch back to original distance units
+config_units -units $orig_dist_unit -value_type distance
